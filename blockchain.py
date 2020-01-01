@@ -1,3 +1,10 @@
+import hashlib
+import json
+
+
+
+
+
 class Blockchain(object):
     """
     This class is reponsible form managing the chain. It will store
@@ -56,9 +63,14 @@ class Blockchain(object):
 
     @staticmethod
     def hash(block):
-        # Hashes a Block
-        pass
+        """
+        Creates a SHA-256 hash of a Block
+        :param block: Block
+        :return: Hash of Block
+        """
 
+        block_string = json.dump(block, sort_keys=True).encode()
+        return hashlib.sha256(block_string).hexdigest()
 
 
     @property
