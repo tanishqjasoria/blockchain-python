@@ -1,7 +1,7 @@
 import hashlib
 import json
 from time import time
-
+from urllib.parse import urlparse
 
 
 
@@ -35,6 +35,22 @@ class Blockchain(object):
 
     # Create the genesis block
     self.new_block(previous_hash=1, proof=100)
+
+    # List of nodes for the decentralized chain
+    self.nodes = set()
+
+
+
+  def register_node(self, address):
+    """
+    Add a new node to the list of node, needed for the decetralized
+    application.
+    :param address: Address of the node - eg. 'http://10.0.0.0:2000'
+    :return: None
+    """
+
+    parsed_url = urlparse(address)
+    self.nodes.add(parsed_url.netloc)
 
 
 
